@@ -31,9 +31,6 @@ colors = ["#fed976", "#feb24c", "#fd8d3c", "#cb181d", "#a50f15", "#67000d"]
 heat_cmap = LinearSegmentedColormap.from_list("heat_cmap", colors)
 
 
-years = [1940, 1949, 1979, 1984, 1999, 2000, 2024]
-
-
 labels = ["<1%", "1-9.99%", "10-19.99%", "20-49.99%", "50-99.99%", "$\\geq$100%"]
 percentiles = ["20th", "40th", "60th", "80th", "99th"]
 runoff_colors = ["#eff3ff", "#bdd7e7", "#6baed6", "#3182bd", "#08519c"]
@@ -101,13 +98,16 @@ test["RO_Over_TP_Percentiles"] = test["RO_Over_TP_Percentiles"].cat.set_categori
     percentiles, ordered=True
 )
 
+bap_res = stat.load_asset("./Assets/Results/BAP_INTERVAL_RESULTS_5070.csv")
+bap_res['Changepoint (cp)'] = bap_res['Changepoint (cp)'].astype(int)
+
 cp_bap_years = {
-    "<1%": 1962,
-    "1-9.99%": 1988,
-    "10-19.99%": 1961,
-    "20-49.99%": 1985,
-    "50-99.99%": 1999,
-    "$\\geq$100%": 1968,
+    "<1%": bap_res[bap_res['BAP Interval'] == "<1%"]['Changepoint (cp)'].iloc[0],
+    "1-9.99%": bap_res[bap_res['BAP Interval'] == "1-9.99%"]['Changepoint (cp)'].iloc[0],
+    "10-19.99%": bap_res[bap_res['BAP Interval'] == "10-19.99%"]['Changepoint (cp)'].iloc[0],
+    "20-49.99%": bap_res[bap_res['BAP Interval'] == "20-49.99%"]['Changepoint (cp)'].iloc[0],
+    "50-99.99%": bap_res[bap_res['BAP Interval'] == "50-99.99%"]['Changepoint (cp)'].iloc[0],
+    "$\\geq$100%": bap_res[bap_res['BAP Interval'] == "$\\geq$100%"]['Changepoint (cp)'].iloc[0],
 }
 
 fig, ax = plt.subplots(1, 6, sharex=True, sharey=True, figsize=(28, 12))

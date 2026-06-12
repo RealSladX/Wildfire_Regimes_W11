@@ -111,7 +111,8 @@ plot_consume_inc = plot_consume_inc.to_crs(epsg=4326)
 fig, (pre_ax, post_ax) = plt.subplots(1,2, figsize=(18,16), sharex=True, sharey=True)
 states.plot(ax=pre_ax, facecolor="grey", alpha=0.5)
 # plot_consume_other.plot(ax=ax, markersize=20, alpha=0.2, color="black")
-plot_consume_inc[plot_consume_inc['FIRE_YEAR_INT'] < 1977].plot(
+cp_year = int(eco_res['Changepoint (cp)'].mean())
+plot_consume_inc[plot_consume_inc['FIRE_YEAR_INT'] < cp_year].plot(
     ax=pre_ax,
     column="US_L3NAME",
     markersize=13,
