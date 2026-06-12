@@ -17,6 +17,7 @@ with open(config_path, "r") as f:
 data_path = os.path.join(project_path, "DATA")
 assets_path = os.path.join(project_path, "Assets")
 shapes_path = os.path.join(assets_path, "Shapes")
+tables_path = os.path.join(assets_path, "Tables")
 W11 = ["CA", "OR", "WA", "ID", "MT", "NV", "AZ", "NM", "CO", "WY", "UT"]
 
 
@@ -67,28 +68,7 @@ eco = read_file(os.path.join(data_path, config["FILE_NAMES"]["ECO"]))[
 ]
 eco = dask_geopandas.from_geopandas(eco, npartitions=num_par)
 
-
-if not os.path.exists(os.path.join(shapes_path, "W11_BURN_AREA_MATRIX_3857")):
-    start = time.time()
-    print("BUILDING BURN AREA MATRIX")
-    print("EPSG: 3857")
-    wbd = wbd.to_crs(epsg=3857)
-    fires = fires.to_crs(epsg=3857)
-    eco = eco.to_crs(epsg=3857)
-    bam = custom_overlay(wbd, fires)
-    bam = bam.set_geometry("geometry")
-    bam["BurnArea"] = bam["geometry"].area / (10**6)
-    bam = custom_overlay(bam, eco)
-    bam = bam.set_geometry("geometry")
-    bam["BurnAreaEco"] = bam["geometry"].area / (10**6)
-    bam = bam.drop(columns=["geometry"])
-    bam.to_csv(
-        os.path.join(shapes_path, "W11_BURN_AREA_MATRIX_3857.csv"), single_file=True
-    )
-    print("\n", time.time() - start)
-
-
-if not os.path.exists(os.path.join(shapes_path, "W11_BURN_AREA_MATRIX_5070")):
+if not os.path.exists(os.path.join(tables_path, "W11_BURN_AREA_MATRIX_5070")):
     start = time.time()
     print("BUILDING BURN AREA MATRIX")
     print("EPSG: 5070")
@@ -103,25 +83,7 @@ if not os.path.exists(os.path.join(shapes_path, "W11_BURN_AREA_MATRIX_5070")):
     bam["BurnAreaEco"] = bam["geometry"].area / (10**6)
     bam = bam.drop(columns=["geometry"])
     bam.to_csv(
-        os.path.join(shapes_path, "W11_BURN_AREA_MATRIX_5070.csv"), single_file=True
+        os.path.join(tables_path, "W11_BURN_AREA_MATRIX_5070.csv"), single_file=True
     )
     print("\n", time.time() - start)
 
-if not os.path.exists(os.path.join(shapes_path, "W11_BURN_AREA_MATRIX_9822")):
-    start = time.time()
-    print("BUILDING BURN AREA MATRIX")
-    print("EPSG: 9822")
-    wbd = wbd.to_crs(epsg=9822)
-    fires = fires.to_crs(epsg=9822)
-    eco = eco.to_crs(epsg=9822)
-    bam = custom_overlay(wbd, fires)
-    bam = bam.set_geometry("geometry")
-    bam["BurnArea"] = bam["geometry"].area / (10**6)
-    bam = custom_overlay(bam, eco)
-    bam = bam.set_geometry("geometry")
-    bam["BurnAreaEco"] = bam["geometry"].area / (10**6)
-    bam = bam.drop(columns=["geometry"])
-    bam.to_csv(
-        os.path.join(shapes_path, "W11_BURN_AREA_MATRIX_9822.csv"), single_file=True
-    )
-    print("\n", time.time() - start)
