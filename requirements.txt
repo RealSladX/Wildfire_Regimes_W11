@@ -1,0 +1,36 @@
+# Core numerical and tabular stack
+numpy>=1.24,<3
+pandas>=2.0,<3
+
+# Geospatial stack
+geopandas>=0.14,<2
+dask-geopandas>=0.4,<1
+shapely>=2.0,<3
+pyproj>=3.6,<4
+fiona>=1.9,<2
+pyogrio>=0.7,<1
+rtree>=1.1,<2
+
+# Climate/array data and GRIB support
+xarray>=2023.6
+cfgrib>=0.9.10
+eccodes>=1.6
+netcdf4>=1.6,<2
+h5netcdf>=1.3,<2
+
+# Parallel/distributed computation
+dask>=2023.6
+partd>=1.4,<2
+
+# Plotting
+matplotlib>=3.7,<4
+seaborn>=0.12,<1
+
+# Statistical/scientific support likely required by helper modules
+scipy>=1.10,<2
+statsmodels>=0.14,<1
+pymannkendall>=1.4,<2
+ruptures>=1.1,<2
+
+# File I/O helpers
+openpyxl>=3.1,<4
