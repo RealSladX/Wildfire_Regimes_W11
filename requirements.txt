@@ -25,12 +25,13 @@ partd>=1.4,<2
 # Plotting
 matplotlib>=3.7,<4
 seaborn>=0.12,<1
+palettable>=3.3,<4
 
-# Statistical/scientific support likely required by helper modules
+# Statistical/scientific support
 scipy>=1.10,<2
 statsmodels>=0.14,<1
 pymannkendall>=1.4,<2
-ruptures>=1.1,<2
+pyhomogeneity>=1.1,<2
 
 # File I/O helpers
 openpyxl>=3.1,<4

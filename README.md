@@ -59,6 +59,7 @@ Before running analysis, place source datasets under `DATA/` and make sure `conf
 | Forests to Faucets dataset | Downstream population and water-supply attributes | Used for downstream consumer groupings |
 | U.S. state boundary shapefile | Figure basemap | Used for Western state outlines |
 
+
 ## Expected local directory structure
 
 Run `00_setup_directories.py` before analysis. It creates the derived-output directories.
@@ -80,11 +81,24 @@ Wildfire_Regimes_W11/
   utils/
     stat.py
     matplot.py
-  config.json
-  requirements.txt
+    geoplot.py
+  config.json requirements.txt
 ```
 
-`utils/stat.py` and `utils/matplot.py` are required helper modules. They must be included in any public release because scripts import `utils.stat` and `utils.matplot`.
+`utils/stat.py` and `utils/matplot.py` are required helper modules. They must be included in any public release because scripts import `utils.stat` and `utils.matplot`. `utils/geoplot.py` is optional for the uploaded main workflow, but include it if retaining all helper utilities.
+
+
+## Helper modules
+
+The repository uses helper modules under `utils/`:
+
+| Module | Required by uploaded workflow? | Purpose | External dependencies introduced |
+|---|---:|---|---|
+| `utils/stat.py` | Yes | Asset loading, quantile grouping, time-series aggregation, Mann-Kendall trend tests, Pettitt changepoint tests | `geopandas`, `pyhomogeneity`, `pymannkendall`, `scipy`, `statsmodels` |
+| `utils/matplot.py` | Yes | Reusable figure and time-series plotting utilities | `matplotlib`, `seaborn`, `palettable` |
+| `utils/geoplot.py` | Optional / legacy | Polygon plotting utilities | `geopandas`, `shapely`, `palettable`; also imports `pycollection.asset_manager.paths` |
+
+Important: `utils/geoplot.py` currently imports `pycollection.asset_manager.paths`. The uploaded main analysis and figure scripts do not import `utils.geoplot`; therefore this dependency is not required for reproducing the manuscript workflow. For a public release, either remove or refactor that import, or include the exact local `pycollection` module if it is part of the project.
 
 ## Configuration
 
@@ -99,8 +113,6 @@ Create `config.json` in the repository root. The workflow expects the following 
   }
 }
 ```
-
-Paths may be absolute or relative to `DATA/`, depending on how the scripts are configured.
 
 ## Workflow order
 
@@ -134,6 +146,20 @@ python make_figure_6.py
 | `make_figure_5.py` | Generates downstream-consumer burn-area time-series figure | `Figures/CONSUMERS_TS.png` |
 | `make_figure_6.py` | Generates downstream-consumer geography/change-class figure | `Figures/POP_DS_GEO_CHANGE_CLASS` |
 
+## Environment-manager compatibility
+
+This repository uses a plain `requirements.txt` so users can install dependencies with their preferred environment manager. Examples:
+
+```bash
+python -m pip install -r requirements.txt
+uv pip install -r requirements.txt
+conda create -n wildfire-regimes-w11 python=3.11
+conda activate wildfire-regimes-w11
+python -m pip install -r requirements.txt
+```
+
+For strict archival reproducibility, create and publish a lock file from the environment used for final manuscript figures, such as `pip freeze > requirements-lock.txt`, `conda env export > environment-lock.yml`, or `uv pip compile requirements.txt -o requirements-lock.txt`. Keep `requirements.txt` as the portable input specification and use the lock file as the exact provenance snapshot.
+
 ## Reproducibility notes
 
 - Coordinate reference systems are handled explicitly in scripts. Burn-area calculations use projected CRS EPSG:5070.
@@ -148,7 +174,7 @@ python make_figure_6.py
 Before archiving or submitting this repository, verify that:
 
 - `requirements.txt` installs successfully in a clean Python environment.
-- `utils/stat.py` and `utils/matplot.py` are included.
+- `utils/stat.py`, `utils/matplot.py`, and any retained optional helper modules are included.
 - All scripts can be run from a clean clone using the documented workflow order.
 - Figure outputs match manuscript figure names and captions.
 - Statistical result CSVs match manuscript tables and supplementary tables.
@@ -156,6 +182,4 @@ Before archiving or submitting this repository, verify that:
 
 ## Citation
 
-If using or adapting this code, cite the associated manuscript and any original data sources.
-
-
+If using or adapting this code, cite the associated manuscript and any original data sources
