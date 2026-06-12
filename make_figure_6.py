@@ -126,11 +126,13 @@ print(f"{time.time() - start:0.1f}")
 
 presum = 0
 postsum = 0
-cp_year = 1994
 
 
 # --- build huc12-level pre/post means ---
-cp_year = 1994
+pop_res = stat.load_asset("./Assets/Results/POP_DS_RESULTS_5070.csv")
+pop_res['Changepoint (cp)'] = pop_res['Changepoint (cp)'].astype(int)
+
+cp_year = pop_res[pop_res['Trend'] == "increasing"]['Changepoint (cp)'].min()
 
 pop_huc12 = (
     plot_consume[plot_consume["POP_DS"] > 999]

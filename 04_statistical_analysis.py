@@ -125,9 +125,9 @@ def ro_tp_test():
 
 ro_ress, tp_ress, ro_over_tp_ress = ro_tp_test()
 
-ro_ress.to_csv(os.path.join(results_path, "RO_TP_HUC12_Percentiles_STATIC.csv"))
-tp_ress.to_csv(os.path.join(results_path, "RO_TP_HUC12_Percentiles_STATIC.csv"))
-ro_over_tp_ress.to_csv(os.path.join(results_path, "RO_TP_HUC12_Percentiles_STATIC.csv"))
+ro_ress.to_csv(os.path.join(results_path, "RO_HUC12_Percentiles_STATIC.csv"))
+tp_ress.to_csv(os.path.join(results_path, "TP_HUC12_Percentiles_STATIC.csv"))
+ro_over_tp_ress.to_csv(os.path.join(results_path, "RO_OVER_TP_HUC12_Percentiles_STATIC.csv"))
 
 
 def categorize_percent(percent):

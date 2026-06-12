@@ -49,7 +49,7 @@ if not os.path.exists(os.path.join(shapes_path, "W11_HUC12")):
     for state in W11:
         s = wbd[wbd["states"].str.contains(state)]
         study_area.append(s)
-    study_area = concat(study_area)
+    study_area = concat(study_area).drop_duplicates(subset="huc12")
     study_area.to_file(os.path.join(shapes_path, "W11_HUC12"))
     print(time.time() - start)
 
@@ -68,7 +68,7 @@ eco = read_file(os.path.join(data_path, config["FILE_NAMES"]["ECO"]))[
 ]
 eco = dask_geopandas.from_geopandas(eco, npartitions=num_par)
 
-if not os.path.exists(os.path.join(tables_path, "W11_BURN_AREA_MATRIX_5070")):
+if not os.path.exists(os.path.join(tables_path, "W11_BURN_AREA_MATRIX_5070.csv")):
     start = time.time()
     print("BUILDING BURN AREA MATRIX")
     print("EPSG: 5070")
