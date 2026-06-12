@@ -100,7 +100,7 @@ Create `config.json` in the repository root. The workflow expects the following 
 }
 ```
 
-Paths may be absolute or relative to `DATA/`, depending on how the scripts are configured. For public release, provide `config.example.json` with placeholder filenames and keep local `config.json` untracked.
+Paths may be absolute or relative to `DATA/`, depending on how the scripts are configured.
 
 ## Workflow order
 
@@ -149,7 +149,6 @@ Before archiving or submitting this repository, verify that:
 
 - `requirements.txt` installs successfully in a clean Python environment.
 - `utils/stat.py` and `utils/matplot.py` are included.
-- `config.example.json` is included and local `config.json` is excluded from version control if it contains local paths.
 - All scripts can be run from a clean clone using the documented workflow order.
 - Figure outputs match manuscript figure names and captions.
 - Statistical result CSVs match manuscript tables and supplementary tables.
