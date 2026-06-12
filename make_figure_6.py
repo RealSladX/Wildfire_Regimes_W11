@@ -2,7 +2,7 @@ import os
 
 from matplotlib.patches import Patch
 import numpy as np
-import pycollection.tsa.stat as stat
+import utils.stat as stat
 from matplotlib.colors import ListedColormap
 import geopandas as gpd
 import matplotlib.pyplot as plt

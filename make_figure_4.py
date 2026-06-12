@@ -2,7 +2,7 @@ import os
 
 import geopandas as gpd
 import matplotlib.pyplot as plt
-import pycollection.tsa.stat as stat
+import utils.stat as stat
 from matplotlib.colors import ListedColormap
 
 project_path = os.path.dirname(os.path.abspath(__file__))

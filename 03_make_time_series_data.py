@@ -1,5 +1,5 @@
 import os
-import pycollection.tsa.stat as stat
+import utils.stat as stat
 
 project_path = os.path.dirname(os.path.abspath(__file__))
 tables_path = os.path.join(project_path, "Assets/Tables")

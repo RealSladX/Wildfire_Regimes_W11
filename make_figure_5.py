@@ -1,6 +1,6 @@
-import pycollection.tsa.stat as stat
+import utils.stat as stat
 import os
-import pycollection.viz.matplot as mplot
+import utils.matplot as mplot
 
 project_path = os.path.dirname(os.path.abspath(__file__))
 shapes_path = os.path.join(project_path, "Assets/Shapes")

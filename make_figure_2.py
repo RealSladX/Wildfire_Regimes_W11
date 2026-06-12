@@ -1,5 +1,5 @@
 import numpy as np
-import pycollection.tsa.stat as stat
+import utils.stat as stat
 import os
 import pandas as pd
 import matplotlib.pyplot as plt
