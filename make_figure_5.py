@@ -30,5 +30,5 @@ mplot.plot_multi_col_same_cats(
     "Burn Area %",
     "upper left",
     "legend",
-    os.path.join(fig_path, "CONSUMERS_TS.png")
+    os.path.join(fig_path, "CONSUMERS_TS.png"),
 )

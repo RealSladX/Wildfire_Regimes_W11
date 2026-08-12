@@ -12,7 +12,7 @@ options.mode.chained_assignment = None
 
 rcParams["legend.fontsize"] = 18
 rcParams["legend.title_fontsize"] = 18
-rcParams['axes.grid'] = False
+rcParams["axes.grid"] = False
 inc_cmap = colorbrewer.sequential.OrRd_9.mpl_colormap
 
 cmap_dict = {"inc": inc_cmap}
@@ -285,7 +285,9 @@ def plot_multi_col_same_cats(
     swap=False,
 ):
     if swap:
-        fig, ax = subplots(len(data), len(cat_labels), sharex=True, sharey=True, figsize=(20,8))
+        fig, ax = subplots(
+            len(data), len(cat_labels), sharex=True, sharey=True, figsize=(20, 8)
+        )
     else:
         fig, ax = subplots(
             len(cat_labels), len(data), sharex=True, sharey=True, figsize=(20, 14)

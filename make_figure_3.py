@@ -36,7 +36,9 @@ percentiles = ["20th", "40th", "60th", "80th", "99th"]
 runoff_colors = ["#eff3ff", "#bdd7e7", "#6baed6", "#3182bd", "#08519c"]
 subplotletters = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j"]
 
-test = stat.load_asset(os.path.join(tables_path, "RO_TP_HUC12_Percentiles_STATIC_5070.csv"))
+test = stat.load_asset(
+    os.path.join(tables_path, "RO_TP_HUC12_Percentiles_STATIC_5070.csv")
+)
 test = test.astype(
     {
         "ro": "float",
@@ -99,15 +101,25 @@ test["RO_Over_TP_Percentiles"] = test["RO_Over_TP_Percentiles"].cat.set_categori
 )
 
 bap_res = stat.load_asset("./Assets/Results/BAP_INTERVAL_RESULTS_5070.csv")
-bap_res['Changepoint (cp)'] = bap_res['Changepoint (cp)'].astype(int)
+bap_res["Changepoint (cp)"] = bap_res["Changepoint (cp)"].astype(int)
 
 cp_bap_years = {
-    "<1%": bap_res[bap_res['BAP Interval'] == "<1%"]['Changepoint (cp)'].iloc[0],
-    "1-9.99%": bap_res[bap_res['BAP Interval'] == "1-9.99%"]['Changepoint (cp)'].iloc[0],
-    "10-19.99%": bap_res[bap_res['BAP Interval'] == "10-19.99%"]['Changepoint (cp)'].iloc[0],
-    "20-49.99%": bap_res[bap_res['BAP Interval'] == "20-49.99%"]['Changepoint (cp)'].iloc[0],
-    "50-99.99%": bap_res[bap_res['BAP Interval'] == "50-99.99%"]['Changepoint (cp)'].iloc[0],
-    "$\\geq$100%": bap_res[bap_res['BAP Interval'] == "$\\geq$100%"]['Changepoint (cp)'].iloc[0],
+    "<1%": bap_res[bap_res["BAP Interval"] == "<1%"]["Changepoint (cp)"].iloc[0],
+    "1-9.99%": bap_res[bap_res["BAP Interval"] == "1-9.99%"]["Changepoint (cp)"].iloc[
+        0
+    ],
+    "10-19.99%": bap_res[bap_res["BAP Interval"] == "10-19.99%"][
+        "Changepoint (cp)"
+    ].iloc[0],
+    "20-49.99%": bap_res[bap_res["BAP Interval"] == "20-49.99%"][
+        "Changepoint (cp)"
+    ].iloc[0],
+    "50-99.99%": bap_res[bap_res["BAP Interval"] == "50-99.99%"][
+        "Changepoint (cp)"
+    ].iloc[0],
+    "$\\geq$100%": bap_res[bap_res["BAP Interval"] == "$\\geq$100%"][
+        "Changepoint (cp)"
+    ].iloc[0],
 }
 
 fig, ax = plt.subplots(1, 6, sharex=True, sharey=True, figsize=(28, 12))

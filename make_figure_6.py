@@ -130,9 +130,9 @@ postsum = 0
 
 # --- build huc12-level pre/post means ---
 pop_res = stat.load_asset("./Assets/Results/POP_DS_RESULTS_5070.csv")
-pop_res['Changepoint (cp)'] = pop_res['Changepoint (cp)'].astype(int)
+pop_res["Changepoint (cp)"] = pop_res["Changepoint (cp)"].astype(int)
 
-cp_year = pop_res[pop_res['Trend'] == "increasing"]['Changepoint (cp)'].min()
+cp_year = pop_res[pop_res["Trend"] == "increasing"]["Changepoint (cp)"].min()
 
 pop_huc12 = (
     plot_consume[plot_consume["POP_DS"] > 999]
@@ -145,11 +145,9 @@ pop_huc12 = (
 )
 
 # wide table: one row per huc12
-pop_diff = (
-    pop_huc12
-    .pivot(index="huc12", columns="period", values="POP_DS")
-    .reset_index()
-)
+pop_diff = pop_huc12.pivot(
+    index="huc12", columns="period", values="POP_DS"
+).reset_index()
 
 # attach geometry once
 geom = plot_consume[["huc12", "geometry"]].drop_duplicates("huc12")
@@ -231,5 +229,3 @@ if handles:
 else:
     print("No change classes present; skipping change-class legend.")
 fig_chg.savefig(os.path.join(figs_path, "POP_DS_GEO_CHANGE_CLASS"), dpi=300)
-
-

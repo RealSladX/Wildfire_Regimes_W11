@@ -1,10 +1,10 @@
 {
-  "FILE_NAMES" : {
-    "ECO" : "ECOL3",
-    "FIRES" : "NIFC_WILDFIRE_PERIMETERS.gdb",
-    "ERA5": "ERA5.grib",
-    "RPS" : "RPSv2.8_20250519.gdb",
-    "F2F" : "F2F2_Assessment.gdb",
-    "WBD" : "WBD_National_GPKG.gpkg"
-  }
+    "FILE_NAMES": {
+        "ECO": "ECOL3",
+        "FIRES": "NIFC_WILDFIRE_PERIMETERS.gdb",
+        "ERA5": "ERA5.grib",
+        "RPS": "RPSv2.8_20250519.gdb",
+        "F2F": "F2F2_Assessment.gdb",
+        "WBD": "WBD_National_GPKG.gpkg",
+    }
 }

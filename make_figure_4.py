@@ -10,7 +10,7 @@ tables_path = os.path.join(project_path, "Assets/Tables")
 results_path = os.path.join(project_path, "Assets/Results")
 fig_path = os.path.join(project_path, "Figures")
 w11 = stat.load_asset("./Assets/Shapes/W11_HUC12/").to_crs(epsg=9822)
-w11["centroid"] = w11['geometry'].centroid
+w11["centroid"] = w11["geometry"].centroid
 states = stat.load_asset("./DATA/cb_2018_us_state_5m.shp").to_crs(epsg=4326)
 states = states[
     states["STUSPS"].isin(
@@ -47,9 +47,11 @@ eco_res_all = eco_res_all.replace(
 
 eco_res = eco_res_all[eco_res_all["Trend"] == "increasing"]
 eco_res = eco_res[eco_res["Kendall's $\\tau$"] > 0.3]
-print(eco_res['Changepoint (cp)'].mean())
+print(eco_res["Changepoint (cp)"].mean())
 eco_other = eco_res_all[eco_res_all["Trend"] != "increasing"]
-plot_consume = stat.load_asset(os.path.join(tables_path, "POP_DS_HUC12_GROUPS_5070.csv"))[
+plot_consume = stat.load_asset(
+    os.path.join(tables_path, "POP_DS_HUC12_GROUPS_5070.csv")
+)[
     [
         "FIRE_YEAR_INT",
         "huc12",
@@ -108,11 +110,11 @@ plot_consume_inc = plot_consume_inc.to_crs(epsg=4326)
 # plot_consume_other = plot_consume_other.to_crs(epsg=4326)
 
 
-fig, (pre_ax, post_ax) = plt.subplots(1,2, figsize=(18,16), sharex=True, sharey=True)
+fig, (pre_ax, post_ax) = plt.subplots(1, 2, figsize=(18, 16), sharex=True, sharey=True)
 states.plot(ax=pre_ax, facecolor="grey", alpha=0.5)
 # plot_consume_other.plot(ax=ax, markersize=20, alpha=0.2, color="black")
-cp_year = int(eco_res['Changepoint (cp)'].mean())
-plot_consume_inc[plot_consume_inc['FIRE_YEAR_INT'] < cp_year].plot(
+cp_year = int(eco_res["Changepoint (cp)"].mean())
+plot_consume_inc[plot_consume_inc["FIRE_YEAR_INT"] < cp_year].plot(
     ax=pre_ax,
     column="US_L3NAME",
     markersize=13,
@@ -130,7 +132,7 @@ plot_consume_inc[plot_consume_inc['FIRE_YEAR_INT'] < cp_year].plot(
         "fancybox": False,
         "frameon": False,
         "labelspacing": 0.8,
-        "bbox_to_anchor": (0.97, -0.3)
+        "bbox_to_anchor": (0.97, -0.3),
     },
 )
 pre_ax.tick_params(
@@ -146,7 +148,7 @@ pre_ax.tick_params(
 
 pre_ax.text(-125, 31.3, "Mid to Late 20th Century", fontsize=18)
 pre_ax.set_ylabel("Latitude", fontsize=18)
-fig.text(0.5, 0.3, "Longitude", ha='center', fontsize=18)
+fig.text(0.5, 0.3, "Longitude", ha="center", fontsize=18)
 
 states.plot(ax=pre_ax, facecolor="none", edgecolor="black", lw=2, alpha=0.5)
 leg3 = pre_ax.get_legend()
@@ -158,7 +160,7 @@ pre_ax.set_ylim(31, 49.5)
 
 states.plot(ax=post_ax, facecolor="grey", alpha=0.5)
 # plot_consume_other.plot(ax=ax, markersize=20, alpha=0.2, color="black")
-plot_consume_inc[plot_consume_inc['FIRE_YEAR_INT'] > 1976].plot(
+plot_consume_inc[plot_consume_inc["FIRE_YEAR_INT"] > 1976].plot(
     ax=post_ax,
     column="US_L3NAME",
     markersize=13,

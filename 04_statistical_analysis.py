@@ -71,7 +71,9 @@ def ro_tp_test():
             runoff_labels5,
             "RO_Over_TP_Percentiles",
         )
-        ts.to_csv(os.path.join(tables_path, f"RO_TP_HUC12_Percentiles_STATIC_{epsg}.csv"))
+        ts.to_csv(
+            os.path.join(tables_path, f"RO_TP_HUC12_Percentiles_STATIC_{epsg}.csv")
+        )
         ro_res = stat.significance_by_class(
             ts,
             "FIRE_YEAR_INT",
@@ -85,7 +87,11 @@ def ro_tp_test():
             "watersheds",
             os.path.join(results_path, f"RO_RESULTS_STATIC_{epsg}"),
         )
-        ro_res.insert(loc=1, column="Period", value="1940-2024")
+        ro_res.insert(
+            loc=1,
+            column="Period",
+            value=f"{ts['FIRE_YEAR_INT'].min()}-{ts['FIRE_YEAR_INT'].max()}",
+        )
         ro_res.insert(loc=1, column="EPSG", value=f"{epsg}")
         ro_ress.append(ro_res)
         tp_res = stat.significance_by_class(
@@ -101,7 +107,11 @@ def ro_tp_test():
             "watersheds",
             os.path.join(results_path, f"TP_RESULTS_STATIC_{epsg}"),
         )
-        tp_res.insert(loc=1, column="Period", value="1940-2024")
+        tp_res.insert(
+            loc=1,
+            column="Period",
+            value=f"{ts['FIRE_YEAR_INT'].min()}-{ts['FIRE_YEAR_INT'].max()}",
+        )
         tp_res.insert(loc=1, column="EPSG", value=f"{epsg}")
         tp_ress.append(tp_res)
         ro_over_tp_res = stat.significance_by_class(
@@ -117,7 +127,11 @@ def ro_tp_test():
             "watersheds",
             os.path.join(results_path, f"RO_OVER_TP_RESULTS_STATIC_{epsg}"),
         )
-        ro_over_tp_res.insert(loc=1, column="Period", value="1940-2024")
+        ro_over_tp_res.insert(
+            loc=1,
+            column="Period",
+            value=f"{ts['FIRE_YEAR_INT'].min()}-{ts['FIRE_YEAR_INT'].max()}",
+        )
         ro_over_tp_res.insert(loc=1, column="EPSG", value=f"{epsg}")
         ro_over_tp_ress.append(ro_over_tp_res)
     return pd.concat(ro_ress), pd.concat(tp_ress), pd.concat(ro_over_tp_ress)
@@ -125,9 +139,24 @@ def ro_tp_test():
 
 ro_ress, tp_ress, ro_over_tp_ress = ro_tp_test()
 
-ro_ress.to_csv(os.path.join(results_path, "RO_HUC12_Percentiles_STATIC.csv"))
-tp_ress.to_csv(os.path.join(results_path, "TP_HUC12_Percentiles_STATIC.csv"))
-ro_over_tp_ress.to_csv(os.path.join(results_path, "RO_OVER_TP_HUC12_Percentiles_STATIC.csv"))
+ro_ress.to_csv(
+    os.path.join(
+        results_path,
+        f"RO_HUC12_Percentiles_STATIC_{ro_over_tp_ress['Period'].iloc[0]}.csv",
+    )
+)
+tp_ress.to_csv(
+    os.path.join(
+        results_path,
+        f"TP_HUC12_Percentiles_STATIC_{ro_over_tp_ress['Period'].iloc[0]}.csv",
+    )
+)
+ro_over_tp_ress.to_csv(
+    os.path.join(
+        results_path,
+        f"RO_OVER_TP_HUC12_Percentiles_STATIC_{ro_over_tp_ress['Period'].iloc[0]}.csv",
+    )
+)
 
 
 def categorize_percent(percent):
@@ -186,8 +215,12 @@ def BAP_Interval_Test():
 
         interval_results = pd.concat(interval_results)
         interval_results_ts = pd.concat(interval_results_ts)
-        interval_results.to_csv(os.path.join(results_path, f"BAP_INTERVAL_RESULTS_{epsg}.csv"))
-        interval_results_ts.to_csv(os.path.join(results_path, f"BAP_INTERVAL_MK_HG_TS_{epsg}.csv"))
+        interval_results.to_csv(
+            os.path.join(results_path, f"BAP_INTERVAL_RESULTS_{epsg}.csv")
+        )
+        interval_results_ts.to_csv(
+            os.path.join(results_path, f"BAP_INTERVAL_MK_HG_TS_{epsg}.csv")
+        )
 
 
 BAP_Interval_Test()
@@ -243,6 +276,7 @@ def eco_test():
         print(eco_results[eco_results["Trend"] == "decreasing"])
         print("\n")
 
+
 eco_test()
 
 
@@ -294,4 +328,3 @@ for tp, tn in con_tests:
         "watersheds",
         os.path.join(results_path, f"POP_DS_RESULTS_{tn}"),
     )
-

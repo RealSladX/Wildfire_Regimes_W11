@@ -7,7 +7,7 @@ import time
 
 num_par = 8
 fire_year_start = 1940
-fire_year_end = 2024
+fire_year_end = 2025
 
 
 project_path = os.path.dirname(os.path.abspath(__file__))
@@ -86,4 +86,3 @@ if not os.path.exists(os.path.join(tables_path, "W11_BURN_AREA_MATRIX_5070.csv")
         os.path.join(tables_path, "W11_BURN_AREA_MATRIX_5070.csv"), single_file=True
     )
     print("\n", time.time() - start)
-

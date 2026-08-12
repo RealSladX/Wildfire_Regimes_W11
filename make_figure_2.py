@@ -132,9 +132,7 @@ for epsg in epsgs:
     test2["huc2"] = test2["huc2"].str[:2]
 
     bins = np.linspace(0, test["RO/TP"].max(), 20)
-    res = stat.load_asset(
-        f"./Assets/Results/RO_OVER_TP_RESULTS_STATIC_{epsg}_TS.csv"
-    )
+    res = stat.load_asset(f"./Assets/Results/RO_OVER_TP_RESULTS_STATIC_{epsg}_TS.csv")
     test["BurnAreaPercentage"] = (test["BurnAreaEco"] / test["huc12_sqkm"]) * 100
     test["FIRE_YEAR_INT"] = test["FIRE_YEAR_INT"].round(0)
     test["FIRE_YEAR_INT"] = test["FIRE_YEAR_INT"].astype(int)
@@ -208,4 +206,3 @@ for epsg in epsgs:
         ax5.add_patch(rect)
 
     fig5.savefig(os.path.join(figs_path, f"RO_TP_BAP_HEATMAP_{epsg}_2.png"), dpi=300)
-
