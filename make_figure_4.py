@@ -123,7 +123,7 @@ plot_consume_inc[plot_consume_inc["FIRE_YEAR_INT"] < cp_year].plot(
     legend=True,
     legend_kwds={
         "fontsize": 14,
-        "title": "Ecoregion (Level 3)",
+        "title": "Ecoregion (Level III)",
         "title_fontsize": 16,
         "loc": "lower center",
         "ncols": 5,

@@ -286,11 +286,11 @@ def plot_multi_col_same_cats(
 ):
     if swap:
         fig, ax = subplots(
-            len(data), len(cat_labels), sharex=True, sharey=True, figsize=(20, 8)
+            len(data), len(cat_labels), sharex=True, sharey=True, figsize=(24, 18)
         )
     else:
         fig, ax = subplots(
-            len(cat_labels), len(data), sharex=True, sharey=True, figsize=(20, 14)
+            len(cat_labels), len(data), sharex=True, sharey=True, figsize=(24, 18)
         )
     letters = [
         "a)",
@@ -339,19 +339,19 @@ def plot_multi_col_same_cats(
                 ax[j].plot(
                     ts[ts[time_col] >= (cp)][time_col],
                     ts[ts[time_col] >= (cp)][plot_col],
-                    lw=4,
+                    lw=5,
                     label=f"{label}",
                     color=colors[i],
                 )
-                ax[j].legend(loc=legend_loc, fontsize=18, frameon=False)
-                ax[j].text(cp + 1, 25, f"{cp}", rotation=90, fontsize=14)
+                ax[j].legend(loc=legend_loc, fontsize=26, frameon=False)
+                ax[j].text(cp + 1, 25, f"{cp}", rotation=90, fontsize=22)
                 ax[j].plot(
                     ts[ts[time_col] <= (cp)][time_col],
                     ts[ts[time_col] <= (cp)][plot_col],
-                    lw=4,
+                    lw=5,
                     label="Pre-cp",
                     color=colors[i],
-                    alpha=0.3,
+                    alpha=0.5,
                 )
                 # slopeline = ax[j].plot(
                 #     ts[time_col],
@@ -379,14 +379,14 @@ def plot_multi_col_same_cats(
                     linestyles="-.",
                     colors="#238443",
                 )
-                ax[j].tick_params(axis="x", labelsize=14, which="both", bottom=False)
-                ax[j].tick_params(axis="y", labelsize=18, which="both", left=False)
+                ax[j].tick_params(axis="x", labelsize=20, which="both", bottom=False)
+                ax[j].tick_params(axis="y", labelsize=20, which="both", left=False)
                 # ax[j].set_facecolor('none')
                 # ax[j].grid(False)
             for r in range(len(cat_labels)):
-                ax[r].tick_params(axis="y", labelsize=18, which="both", left=True)
+                ax[r].tick_params(axis="y", labelsize=20, which="both", left=True)
             ax[len(cat_labels) - 1].tick_params(
-                axis="x", labelsize=18, which="both", bottom=True
+                axis="x", labelsize=20, which="both", bottom=True
             )
             ax[j].set_xlim(1940, 2024)
             ax[len(cat_labels) - 1].xaxis.set_major_locator(MultipleLocator(4))
@@ -418,9 +418,9 @@ def plot_multi_col_same_cats(
                     d_labels.append(cat_cols_names[i])
                     repeat = True
                 ax[i][j].legend(
-                    loc=legend_loc, fontsize=24, frameon=False, handlelength=0
+                    loc=legend_loc, fontsize=28, frameon=False, handlelength=0
                 )
-                ax[i][j].text(cp + 1, 55, f"{cp}", rotation=90, fontsize=18)
+                ax[i][j].text(cp + 1, 55, f"{cp}", rotation=90, fontsize=22)
                 ax[i][j].plot(
                     ts[ts[time_col] <= (cp)][time_col],
                     ts[ts[time_col] <= (cp)][plot_col],
@@ -455,17 +455,17 @@ def plot_multi_col_same_cats(
                     linestyles="-.",
                     colors="#238443",
                 )
-                ax[i][j].tick_params(axis="x", labelsize=16, which="both", bottom=False)
-                ax[i][j].tick_params(axis="y", labelsize=16, which="both", left=False)
+                ax[i][j].tick_params(axis="x", labelsize=18, which="both", bottom=False)
+                ax[i][j].tick_params(axis="y", labelsize=18, which="both", left=False)
 
             for r in range(len(data)):
                 ax[r][0].tick_params(axis="y", which="both", left=False)
             for c in range(len(cat_labels)):
                 ax[len(data) - 1][c].tick_params(
-                    axis="x", labelsize=16, which="both", bottom=True
+                    axis="x", labelsize=18, which="both", bottom=True
                 )
     # fig.patch.set_alpha(0)        # or: fig.patch.set_facecolor('none')
-    fig.text(0.06, 0.5, ylabel, va="center", rotation="vertical", size=18)
+    fig.text(0.08, 0.5, ylabel, va="center", rotation="vertical", size=28)
     fig.legend(
         d_handles
         + [
@@ -476,10 +476,11 @@ def plot_multi_col_same_cats(
         d_labels + ["Pre-cp average", "Post-cp average", "Slope"],
         loc="lower center",
         ncols=2,
-        fontsize=18,
+        fontsize=22,
         frameon=False,
+        bbox_to_anchor=(0.5, 0.047),
     )
-    subplots_adjust(left=0.1, top=0.98, bottom=0.1, right=0.9, hspace=0, wspace=0)
+    subplots_adjust(hspace=0, wspace=0)
     fig.savefig(savepath, dpi=300)
     # show()
 
