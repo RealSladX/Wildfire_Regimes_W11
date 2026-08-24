@@ -8,7 +8,7 @@ from pandas import concat
 
 num_par = 8
 fire_year_start = 1940
-fire_year_end = 2024
+fire_year_end = 2025
 
 
 project_path = os.path.dirname(os.path.abspath(__file__))
@@ -62,7 +62,7 @@ fires = read_file(os.path.join(data_path, config["FILE_NAMES"]["FIRES"]))[
     ["FIRE_YEAR_INT", "INCIDENT", "geometry"]
 ]
 fires = fires[fires["FIRE_YEAR_INT"] >= fire_year_start]
-fires = fires[fires["FIRE_YEAR_INT"] <= fire_year_end]
+fires = fires[fires["FIRE_YEAR_INT"] < fire_year_end]
 fires = dask_geopandas.from_geopandas(fires, npartitions=num_par)
 eco = read_file(os.path.join(data_path, config["FILE_NAMES"]["ECO"]))[
     ["NA_L1NAME", "NA_L2NAME", "US_L3NAME", "geometry"]
