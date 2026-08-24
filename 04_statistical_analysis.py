@@ -1,6 +1,8 @@
-import utils.stat as stat
-import pandas as pd
 import os
+
+import pandas as pd
+
+from utils import stat
 
 project_path = os.path.dirname(os.path.abspath(__file__))
 results_path = os.path.join(project_path, "Assets/Results")
@@ -211,7 +213,6 @@ def BAP_Interval_Test():
             interval_results.append(res)
             i_res = pd.merge(pivot[pivot["BAP Interval"] == b], res, on="BAP Interval")
             interval_results_ts.append(i_res)
-        #
 
         interval_results = pd.concat(interval_results)
         interval_results_ts = pd.concat(interval_results_ts)

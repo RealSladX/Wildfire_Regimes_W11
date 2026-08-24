@@ -1,13 +1,14 @@
 import json
 import os
-from geopandas import read_file, GeoDataFrame
-from pandas import concat
-import dask_geopandas
 import time
+
+import dask_geopandas
+from geopandas import GeoDataFrame, read_file
+from pandas import concat
 
 num_par = 8
 fire_year_start = 1940
-fire_year_end = 2025
+fire_year_end = 2024
 
 
 project_path = os.path.dirname(os.path.abspath(__file__))

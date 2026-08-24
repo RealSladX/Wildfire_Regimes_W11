@@ -2,8 +2,9 @@ import os
 
 import geopandas as gpd
 import matplotlib.pyplot as plt
-import utils.stat as stat
 from matplotlib.colors import ListedColormap
+
+from utils import stat
 
 project_path = os.path.dirname(os.path.abspath(__file__))
 tables_path = os.path.join(project_path, "Assets/Tables")
@@ -29,6 +30,7 @@ rev_bap = list(reversed(bap_intervals))
 eco_res_all = stat.load_asset(os.path.join(results_path, "ECO_MK_HG_L3_5070.csv"))
 eco_res_all["Kendall's $\\tau$"] = eco_res_all["Kendall's $\\tau$"].astype(float)
 eco_res_all["Changepoint (cp)"] = eco_res_all["Changepoint (cp)"].astype(int)
+print(eco_res_all)
 
 
 eco_res_all = eco_res_all.replace(
@@ -46,7 +48,8 @@ eco_res_all = eco_res_all.replace(
 
 
 eco_res = eco_res_all[eco_res_all["Trend"] == "increasing"]
-eco_res = eco_res[eco_res["Kendall's $\\tau$"] > 0.3]
+eco_res = eco_res[eco_res["Kendall's $\\tau$"] > 0.29]
+print(eco_res)
 print(eco_res["Changepoint (cp)"].mean())
 eco_other = eco_res_all[eco_res_all["Trend"] != "increasing"]
 plot_consume = stat.load_asset(

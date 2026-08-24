@@ -1,12 +1,11 @@
-from pandas import pivot_table, Categorical
-from pandas import options
 import matplotlib.pyplot as plt
-from numpy import arange, zeros, array
-from seaborn import heatmap
+from matplotlib.pyplot import rcParams, show, subplots, subplots_adjust
+from matplotlib.ticker import AutoMinorLocator, MultipleLocator
+from numpy import arange, array, zeros
 from palettable import colorbrewer
-from matplotlib.pyplot import subplots, subplots_adjust, show, rcParams
+from pandas import Categorical, options, pivot_table
 from pandas.plotting import table
-from matplotlib.ticker import MultipleLocator, AutoMinorLocator
+from seaborn import heatmap
 
 options.mode.chained_assignment = None
 

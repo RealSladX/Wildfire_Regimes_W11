@@ -1,6 +1,7 @@
-import utils.stat as stat
 import os
+
 import utils.matplot as mplot
+from utils import stat
 
 project_path = os.path.dirname(os.path.abspath(__file__))
 shapes_path = os.path.join(project_path, "Assets/Shapes")
